@@ -117,12 +117,12 @@
 
 @font-face {
     font-family: 'Jost';
-    src: url("{{  }}"'Jost-Medium.eot');
-    src: url("{{  }}"'Jost-Medium.eot?#iefix') format('embedded-opentype'),
-        url("{{  }}"'Jost-Medium.woff2') format('woff2'),
-        url("{{  }}"'Jost-Medium.woff') format('woff'),
-        url("{{  }}"'Jost-Medium.ttf') format('truetype'),
-        url("{{  }}"'Jost-Medium.svg#Jost-Medium') format('svg');
+    src: url("{{ 'Jost-Medium.eot' | file_url }}");
+    src: url("{{ 'Jost-Medium.eot?#iefix' | file_url }}") format('embedded-opentype'),
+        url("{{ 'Jost-Medium.woff2' | file_url }}") format('woff2'),
+        url("{{ 'Jost-Medium.woff' | file_url }}") format('woff'),
+        url("{{ 'Jost-Medium.ttf' | file_url }}") format('truetype'),
+        url("{{ 'Jost-Medium.svg' | assest_url }}") format('svg');
     font-weight: 500;
     font-style: normal;
     font-display: swap;
