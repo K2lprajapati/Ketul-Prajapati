@@ -1,0 +1,16 @@
+<h2 class="custom-heading">{{ block.settings.custom_heading }}</h2>
+{% schema %}
+{
+  "name": "Heading",
+  "settings": [
+    {
+      "type": "richtext",
+      "id": "custom_heading",
+      "label": "Heading"
+    }
+  ],
+  "presets": [
+    { "name": "Heading" },
+  ]
+}
+{% endschema %}
