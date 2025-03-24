@@ -78,12 +78,12 @@
 
 @font-face {
     font-family: 'Jost';
-    src: url("{{ 'Jost-Bold.eot' }}");
-    src: url("{{ 'Jost-Bold.eot' }}") format('embedded-opentype'),
-        url("{{  }}"'Jost-Bold.woff2') format('woff2'),
-        url("{{  }}"'Jost-Bold.woff') format('woff'),
-        url("{{  }}"'Jost-Bold.ttf') format('truetype'),
-        url("{{  }}"'Jost-Bold.svg#Jost-Bold') format('svg');
+    src: url("{{ 'Jost-Bold.eot' | file_url }}");
+    src: url("{{ 'Jost-Bold.eot' | file_url }}") format('embedded-opentype'),
+        url("{{ 'Jost-Bold.woff2' | file_url }}") format('woff2'),
+        url("{{ 'Jost-Bold.woff' | file_url }}") format('woff'),
+        url("{{ 'Jost-Bold.ttf' | file_url }}") format('truetype'),
+        url("{{ 'Jost-Bold.svg' | assest_url }}") format('svg');
     font-weight: bold;
     font-style: normal;
     font-display: swap;
