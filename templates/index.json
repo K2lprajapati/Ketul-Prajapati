@@ -38,11 +38,11 @@
         "custom_button_TnpFiN"
       ],
       "settings": {
-        "custom-layout": "page-width",
+        "custom-layout": "full-width",
         "image-1": "shopify://shop_images/banner-1.jpg",
         "image_height": "large",
         "desktop_content_position": "bottom-left",
-        "desktop_content_alignment": "center"
+        "desktop_content_alignment": "left"
       }
     }
   },
