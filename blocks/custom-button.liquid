@@ -1,0 +1,27 @@
+<a href="{{ block.settings.custom_button_url }}" class="custom-link custom-button">
+  {{ block.settings.custom_button_text }}
+  <span class="svg-wrapper">
+    {{ 'icon-right-arrow.svg' | inline_asset_content }}
+  </span>
+</a>
+{% schema %}
+{
+  "name": "Button",
+  "class":"button-block",
+  "settings": [
+    {
+      "type": "richtext",
+      "id": "custom_button_text",
+      "label": "Button"
+    },
+    {
+      "type": "url",
+      "id": "custom_button_url",
+      "label": "URL"
+    }
+  ],
+  "presets": [
+    { "name": "Button" },
+  ]
+}
+{% endschema %}
