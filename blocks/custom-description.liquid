@@ -1,6 +1,18 @@
+{{ block.settings.custom_description }}
 {% schema %}
-  {
-    "name": "Block name",
-    "settings": []
-  }
+{
+  "name": "Description",
+  "tag":"div",
+  "class":"description-block",
+  "settings": [
+    {
+      "type": "richtext",
+      "id": "custom_description",
+      "label": "Description"
+    }
+  ],
+  "presets": [
+    { "name": "Description" },
+  ]
+}
 {% endschema %}
