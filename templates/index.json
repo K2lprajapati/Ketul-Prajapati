@@ -44,9 +44,30 @@
         "desktop_content_position": "bottom-left",
         "desktop_content_alignment": "left"
       }
+    },
+    "custom_text_TrCh3y": {
+      "type": "custom-text",
+      "blocks": {
+        "custom_description_Lq7ct3": {
+          "type": "custom-description",
+          "settings": {
+            "custom_description": "<p>SUSTAINABLE, ETHICALLY MADE CLOTHES IN SIZES XXS TO 6XL</p>"
+          }
+        }
+      },
+      "block_order": [
+        "custom_description_Lq7ct3"
+      ],
+      "settings": {
+        "desktop_content_alignment": "center",
+        "color_scheme": "scheme-2",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
     }
   },
   "order": [
-    "custom_image_banner_pykUep"
+    "custom_image_banner_pykUep",
+    "custom_text_TrCh3y"
   ]
 }
