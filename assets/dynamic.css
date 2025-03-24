@@ -2,6 +2,7 @@
 /* genral css start here */
 /*=======================*/
 h1 .h1,h2 .h2,h3 .h3,h4 .h4,h5 .h5,h6 .h6{font-family: 'Jost';}
+
 .custom-button { position: relative;overflow: hidden;color: #fff;} 
 .custom-button:before { content: ""; position: absolute; top: 0; right: 0; bottom: 0; left: 0; background-color:#FFF544; transform: translateX(-100%);transition: 0.5s ease-in-out;z-index: -1;} 
 .custom-button:hover { color:#000; } 
