@@ -15,20 +15,20 @@
         "custom_heding_cjVypw": {
           "type": "custom-heding",
           "settings": {
-            "custom_heading": ""
+            "custom_heading": "<p>The Gift Guide</p>"
           }
         },
         "custom_description_qerjTy": {
           "type": "custom-description",
           "settings": {
-            "custom_description": ""
+            "custom_description": "<p>Discover Joy: Your Ultimate Holiday Gift Destination. Explore our curated selection and find the perfect gifts to delight your loved ones this holiday season.</p>"
           }
         },
         "custom_button_TnpFiN": {
           "type": "custom-button",
           "settings": {
-            "custom_button_text": "",
-            "custom_button_url": ""
+            "custom_button_text": "<p>Shop Now</p>",
+            "custom_button_url": "#"
           }
         }
       },
