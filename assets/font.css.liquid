@@ -91,12 +91,12 @@
 
 @font-face {
     font-family: 'Jost';
-    src: url("{{  }}"'Jost-SemiBold.eot');
-    src: url("{{  }}"'Jost-SemiBold.eot?#iefix') format('embedded-opentype'),
-        url("{{  }}"'Jost-SemiBold.woff2') format('woff2'),
-        url("{{  }}"'Jost-SemiBold.woff') format('woff'),
-        url("{{  }}"'Jost-SemiBold.ttf') format('truetype'),
-        url("{{  }}"'Jost-SemiBold.svg#Jost-SemiBold') format('svg');
+    src: url("{{ 'Jost-SemiBold.eot' | file_url }}");
+    src: url("{{ 'Jost-SemiBold.eot' | file_url }}") format('embedded-opentype'),
+        url("{{ 'Jost-SemiBold.woff2' | file_url }}") format('woff2'),
+        url("{{ 'Jost-SemiBold.woff' | file_url }}") format('woff'),
+        url("{{ 'Jost-SemiBold.ttf' | file_url }}") format('truetype'),
+        url("{{ 'Jost-SemiBold.svg' | assest_url }}") format('svg');
     font-weight: 600;
     font-style: normal;
     font-display: swap;
@@ -104,12 +104,12 @@
 
 @font-face {
     font-family: 'Jost';
-    src: url("{{  }}"'Jost-ExtraBold.eot');
-    src: url("{{  }}"'Jost-ExtraBold.eot?#iefix') format('embedded-opentype'),
-        url("{{  }}"'Jost-ExtraBold.woff2') format('woff2'),
-        url("{{  }}"'Jost-ExtraBold.woff') format('woff'),
-        url("{{  }}"'Jost-ExtraBold.ttf') format('truetype'),
-        url("{{  }}"'Jost-ExtraBold.svg#Jost-ExtraBold') format('svg');
+    src: url("{{ 'Jost-ExtraBold.eot' | file_url }}");
+    src: url("{{ 'Jost-ExtraBold.eot' | file_url }}") format('embedded-opentype'),
+        url("{{ 'Jost-ExtraBold.woff2' | file_url }}") format('woff2'),
+        url("{{ 'Jost-ExtraBold.woff' | file_url }}") format('woff'),
+        url("{{ 'Jost-ExtraBold.ttf' | file_url }}") format('truetype'),
+        url("{{ 'Jost-ExtraBold.svg' | assest_url }}") format('svg');
     font-weight: bold;
     font-style: normal;
     font-display: swap;
