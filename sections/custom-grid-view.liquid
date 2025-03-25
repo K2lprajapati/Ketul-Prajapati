@@ -9,13 +9,6 @@
       padding-bottom: {{ section.settings.padding_bottom }}px;
     }
   }
-  {% for block in section.blocks %}
-    #section-{{ section.id }} #block-{{ block.id }} .open-popup {
-      position: absolute;
-      top:{{ section.settings.position_top}}%;
-      right:{{ section.settings.position_right }}%;
-    }
-  {% endfor %}
 {%- endstyle -%}
 
 <div class="section-{{ section.id }}-padding">
