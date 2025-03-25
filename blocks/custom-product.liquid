@@ -1,5 +1,5 @@
+{% assign variant_images = product.images | where: 'attached_to_variant?', true | map: 'src' %}
 <div class="custom-product-wrapper">
-  <!-- <img src="{{ product.featured_image | img_url: 'master' }}" alt="{{ product.title | escape }}"> -->
   {%- unless block.settings['custom-product'] -%}
     {% render 'product-media-gallery', product: product, variant_images: variant_images, limit: 1 %}
   {%- else -%}
