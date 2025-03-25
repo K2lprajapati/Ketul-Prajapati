@@ -1,10 +1,12 @@
-<div class="{{ section.settings.section-checkbox }}">
-  <div class="custom-section-product">
-    <div class="custom-section-text">
-      <h2>{{ section.settings['section-heading-text'] }}</h2>
-    </div>
-    <div class="custom-product-grid">
-      {% content_for 'blocks' %}
+<div>
+  <div class="{{ section.settings.section-checkbox }}">
+    <div class="custom-section-product">
+      <div class="custom-section-text">
+        <h2>{{ section.settings['section-heading-text'] }}</h2>
+      </div>
+      <div class="custom-product-grid">
+        {% content_for 'blocks' %}
+      </div>
     </div>
   </div>
 </div>
