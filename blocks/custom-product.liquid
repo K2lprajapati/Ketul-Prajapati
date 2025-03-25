@@ -1,8 +1,6 @@
-{% assign images = product.media | where: 'alt', 'main-image' %}
+{% comment %} {% assign images = product.media | where: 'alt', 'main-image' %} {% endcomment %}
 
-<div>
-  {{ images[0] | img_tag }}
-</div>
+{{ product.images[0] | img_url: '600x600' | img_tag: product.images[0].alt }}
 {% comment %}
   <div class="custom-product-wrapper">
     {%- unless block.settings['custom-product'] -%}
