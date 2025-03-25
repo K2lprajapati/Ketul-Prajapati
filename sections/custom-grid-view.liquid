@@ -25,12 +25,7 @@
         <h2>{{ section.settings['section-heading-text'] }}</h2>
       </div>
       <div class="custom-product-grid" id="section-{{ section.id }}">
-        {% for block in section.blocks %}
-          <div id="block-{{ block.id }}">
-            {{ block.type }}
-            {{ block.settings['custom-product'] }}
-          </div>
-        {% endfor %}
+        {% content_for 'blocks' %}
       </div>
     </div>
   </div>
