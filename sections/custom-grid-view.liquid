@@ -1,5 +1,10 @@
-<div class="custom-product-grid">
-  {% content_for 'blocks' %}
+<div class="">
+  <div>
+    <h2>{{ section.settings['section-heading-text'] }}</h2>
+  </div>
+  <div class="custom-product-grid">
+    {% content_for 'blocks' %}
+  </div>
 </div>
 
 {% schema %}
