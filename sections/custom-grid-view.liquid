@@ -9,7 +9,7 @@
       padding-bottom: {{ section.settings.padding_bottom }}px;
     }
   }
-  button.open-popup {
+  #section-{{ section.id }} button.open-popup {
     position: absolute;
     top:{{ section.settings.position_top}}px;
     right:{{ section.settings.position_right }}px;
@@ -22,7 +22,7 @@
       <div class="custom-section-text">
         <h2>{{ section.settings['section-heading-text'] }}</h2>
       </div>
-      <div class="custom-product-grid">
+      <div class="custom-product-grid" id="section-{{ section.id }}">
         {% content_for 'blocks' %}
       </div>
     </div>
