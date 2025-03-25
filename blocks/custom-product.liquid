@@ -1,4 +1,12 @@
-{{ product.featured_image | img_url: '600x600' | img_tag: product.featured_image.alt }}
+{% for block in section.blocks %}
+  {% assign product = all_products[block.settings.product] %}
+  {% for image in product.images %}
+    <img src="{{ image.src | product_img_url: 'grande' }}">
+    {{ product.title }}
+    {{ product.price | money_without_trailing_zeros }}
+    {{ product.description }}
+  {% endfor %}
+{% endfor %}
 {% comment %}
   <div class="custom-product-wrapper">
     {%- unless block.settings['custom-product'] -%}
