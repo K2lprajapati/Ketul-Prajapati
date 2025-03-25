@@ -3,9 +3,7 @@
   <div class="product-img-wrapper">
     {{ image.src | image_url: width: 433, height: 444 | image_tag: class: 'custom-product-img' }}
     <button class="open-popup">
-      <span>
-        {{ 'icon-account.svg' | inline_asset_content }}
-      </span>
+      <span class="svg-wrapper">{{ 'icon-account.svg' | inline_asset_content }}</span>
     </button>
     {% comment %}
       <img src="{{ image.src | product_img_url: 'grande' }}">
