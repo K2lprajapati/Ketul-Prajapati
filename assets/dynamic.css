@@ -53,6 +53,42 @@ h1,.h1,h2,.h2,h3,.h3,h4,.h4,h5,.h5,h6,.h6,a,li,span{font-family: 'Jost';}
 /* popup css start here */
 /*======================*/
 .hidden{display:none;}
+.product-popup {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      display: flex; justify-content: center; align-items: center;
+    }
+    .popup-content {
+      background: white;
+      padding: 20px;
+      width: 400px;
+      text-align: center;
+      position: relative;
+    }
+    .close-popup {
+      position: absolute;
+      top: 10px; right: 15px;
+      cursor: pointer;
+      font-size: 24px;
+    }
+    .color-variants {
+      display: flex; gap: 10px; margin: 10px 0;
+    }
+    .color-pill {
+      width: 40px; height: 40px;
+      border-radius: 20px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 2px solid transparent;
+      transition: border 0.3s ease;
+    }
+    .color-pill.selected {
+      border: 2px solid black;
+    }
 /*====================*/
 /* popup css end here */
 /*====================*/
