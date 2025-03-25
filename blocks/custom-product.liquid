@@ -1,7 +1,7 @@
 {% assign product = all_products[block.settings['custom-product']] %}
 {% for image in product.images %}
-  <div class="">
-    {{ image.src | image_url: width: 300 | image_tag: class: 'custom-product-img' }}
+  <div class="product-img-wrapper">
+    {{ image.src | image_url: width: 433, height: 444 | image_tag: class: 'custom-product-img' }}
     {% comment %}
       <img src="{{ image.src | product_img_url: 'grande' }}">
       {{ product.title }}
