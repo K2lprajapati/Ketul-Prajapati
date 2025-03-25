@@ -1,10 +1,10 @@
-{% stylesheet %}
+{% style %}
   #section-{{ section.id }} #block-{{ block.id }} .open-popup {
     position: absolute;
     top:{{ block.settings.position_top}}%;
     right:{{ block.settings.position_right }}%;
   }
-{% endstylesheet %}
+{% endstyle %}
 {% assign product = all_products[block.settings['custom-product']] %}
 {% for image in product.images %}
   <div class="product-img-wrapper" id="block-{{ block.id }}">
