@@ -42,6 +42,8 @@ h1,.h1,h2,.h2,h3,.h3,h4,.h4,h5,.h5,h6,.h6,a,li,span{font-family: 'Jost';}
 .custom-grid-view .custom-section-text h2 p{margin: 0;}
 .custom-grid-view .custom-section-product .custom-product-grid {display: flex;flex-wrap: wrap;gap: 20px;}
 .custom-grid-view .custom-section-product .custom-product-main {width: calc(33.3% - 20px);}
+.custom-grid-view .custom-section-product .custom-product-main .product-img-wrapper { position: relative; padding-bottom: 55.6%; }
+.custom-grid-view .custom-section-product .custom-product-main img.custom-product-img { width: 100%; height: 100%; position: absolute; top: 0; left: 0; object-fit: cover; }
 /*===================*/
 /* grid css end here */
 /*===================*/
