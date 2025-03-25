@@ -1,6 +1,6 @@
 {% assign product = all_products[block.settings['custom-product']] %}
 {% for image in product.images %}
-  <div class="product-img-wrapper">
+  <div class="product-img-wrapper" id="block-{{ block.id }}">
     {{ image.src | image_url: width: 433, height: 444 | image_tag: class: 'custom-product-img' }}
     <button class="open-popup">
       <span class="svg-wrapper">{{ 'icon-plus-custom.svg' | inline_asset_content }}</span>
