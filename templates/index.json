@@ -115,7 +115,7 @@
       ],
       "settings": {
         "section-heading-text": "<p>Tisso vison in the wild</p>",
-        "section-checkbox": "page-width",
+        "section-checkbox": "full-width",
         "padding_top": 100,
         "padding_bottom": 100
       }
