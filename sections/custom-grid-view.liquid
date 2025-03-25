@@ -75,7 +75,43 @@
       "default": 52
     },
   ],
-  "blocks": [{ "type": "@theme" }, { "type": "@app" }],
+  "blocks": [
+    {
+      "type": "custom-product",
+      "name": "custom product",
+      "settings": [
+        {
+          "type": "product",
+          "id": "custom-product",
+          "label": "Product"
+        },
+        {
+          "type": "header",
+          "content": "Button Position"
+        },
+        {
+          "type": "range",
+          "id": "position_top",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "label": "Position Top",
+          "default": 40
+        },
+        {
+          "type": "range",
+          "id": "position_right",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "label": "Position Right",
+          "default": 52
+        }
+      ],
+    },
+  ],
   "presets": [
     {
       "name": "custom grid view",
