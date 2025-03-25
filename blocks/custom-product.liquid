@@ -1,6 +1,22 @@
+<a href="{{ block.settings.custom_button_url }}" class="custom-link custom-button">
+  {{ block.settings.custom_button_text }}
+  <span class="svg-wrapper">
+    {{ 'icon-right-arrow.svg' | inline_asset_content }}
+  </span>
+</a>
 {% schema %}
-  {
-    "name": "Block name",
-    "settings": []
-  }
+{
+  "name": "Custom Product",
+  "class":"button-block",
+  "settings": [
+    {
+      "type": "product",
+      "id": "custom-product",
+      "label": "Product"
+    },
+  ],
+  "presets": [
+    { "name": "Custom Product" },
+  ]
+}
 {% endschema %}
