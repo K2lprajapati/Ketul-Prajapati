@@ -72,42 +72,48 @@
           "type": "custom-product",
           "settings": {
             "custom-product": "black-leather-bag",
-            "custom-product-1": ""
+            "position_top": 100,
+            "position_right": 52
           }
         },
         "custom_product_KfAT79": {
           "type": "custom-product",
           "settings": {
             "custom-product": "blue-silk-tuxedo",
-            "custom-product-1": ""
+            "position_top": 40,
+            "position_right": 52
           }
         },
         "custom_product_neLMKC": {
           "type": "custom-product",
           "settings": {
             "custom-product": "chequered-red-shirt",
-            "custom-product-1": ""
+            "position_top": 40,
+            "position_right": 52
           }
         },
         "custom_product_aHT7MN": {
           "type": "custom-product",
           "settings": {
             "custom-product": "classic-leather-jacket",
-            "custom-product-1": ""
+            "position_top": 40,
+            "position_right": 52
           }
         },
         "custom_product_hiXqQU": {
           "type": "custom-product",
           "settings": {
             "custom-product": "classic-varsity-top",
-            "custom-product-1": ""
+            "position_top": 40,
+            "position_right": 52
           }
         },
         "custom_product_BPDFD9": {
           "type": "custom-product",
           "settings": {
             "custom-product": "dark-denim-top",
-            "custom-product-1": ""
+            "position_top": 40,
+            "position_right": 52
           }
         }
       },
@@ -123,9 +129,7 @@
         "section-heading-text": "<p>Tisso vison in the wild</p>",
         "section-checkbox": "page-width",
         "padding_top": 60,
-        "padding_bottom": 60,
-        "position_top": 54,
-        "position_bottom": 13
+        "padding_bottom": 60
       }
     }
   },
