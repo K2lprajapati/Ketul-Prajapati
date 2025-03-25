@@ -1,8 +1,8 @@
 {% stylesheet %}
   #section-{{ section.id }} #block-{{ block.id }} .open-popup {
     position: absolute;
-    top:{{ section.settings.position_top}}%;
-    right:{{ section.settings.position_right }}%;
+    top:{{ block.settings.position_top}}%;
+    right:{{ block.settings.position_right }}%;
   }
 {% endstylesheet %}
 {% assign product = all_products[block.settings['custom-product']] %}
