@@ -119,52 +119,11 @@
         "padding_top": 60,
         "padding_bottom": 60
       }
-    },
-    "collection_list_8qp8DV": {
-      "type": "collection-list",
-      "blocks": {
-        "featured_collection_PYtLJW": {
-          "type": "featured_collection",
-          "settings": {
-            "collection": ""
-          }
-        },
-        "featured_collection_gEKXrR": {
-          "type": "featured_collection",
-          "settings": {
-            "collection": ""
-          }
-        },
-        "featured_collection_CgXdb8": {
-          "type": "featured_collection",
-          "settings": {
-            "collection": ""
-          }
-        }
-      },
-      "block_order": [
-        "featured_collection_PYtLJW",
-        "featured_collection_gEKXrR",
-        "featured_collection_CgXdb8"
-      ],
-      "settings": {
-        "title": "Collections",
-        "heading_size": "h1",
-        "image_ratio": "square",
-        "columns_desktop": 3,
-        "color_scheme": "",
-        "show_view_all": false,
-        "columns_mobile": "1",
-        "swipe_on_mobile": false,
-        "padding_top": 36,
-        "padding_bottom": 36
-      }
     }
   },
   "order": [
     "custom_image_banner_pykUep",
     "custom_text_TrCh3y",
-    "custom_grid_view_cAp7y6",
-    "collection_list_8qp8DV"
+    "custom_grid_view_cAp7y6"
   ]
 }
