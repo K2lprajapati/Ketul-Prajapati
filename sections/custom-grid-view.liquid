@@ -26,7 +26,10 @@
       </div>
       <div class="custom-product-grid" id="section-{{ section.id }}">
         {% for block in section.blocks %}
-          {{ block.content }}
+          <div id="block-{{ block.id }}">
+            {{ block.type }}
+            {{ block.settings['custom-product'] }}
+          </div>
         {% endfor %}
       </div>
     </div>
