@@ -1,10 +1,13 @@
 {% assign product = all_products[block.settings['custom-product']] %}
 
 {% for image in product.images %}
-  <img src="{{ image.src | product_img_url: 'grande' }}">
-  {{ product.title }}
-  {{ product.price | money_without_trailing_zeros }}
-  {{ product.description }}
+  {{ image.src | image_tag | product_img_url: 'grande' }}
+  {% comment %}
+    <img src="{{ image.src | product_img_url: 'grande' }}">
+    {{ product.title }}
+    {{ product.price | money_without_trailing_zeros }}
+    {{ product.description }}
+  {% endcomment %}
 {% endfor %}
 
 {% schema %}
