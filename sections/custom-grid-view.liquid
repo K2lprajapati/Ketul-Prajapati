@@ -1,5 +1,5 @@
 {%- liquid
-  assign product = section.settings['custom-product']
+  assign product = block.settings['custom-product']
   if product == null
     assign placeholder = true
   endif
