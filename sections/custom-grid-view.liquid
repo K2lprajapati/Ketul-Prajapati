@@ -22,11 +22,9 @@
       <div class="custom-section-text">
         <h2>{{ section.settings['section-heading-text'] }}</h2>
       </div>
-      {% for block in settings.blocks %}
-        <div class="custom-product-grid">
-          {% content_for 'blocks' %}
-        </div>
-      {% endfor %}
+      <div class="custom-product-grid">
+        {% content_for 'blocks' %}
+      </div>
     </div>
   </div>
 </div>
