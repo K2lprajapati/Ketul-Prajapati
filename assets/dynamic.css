@@ -38,7 +38,7 @@ h1,.h1,h2,.h2,h3,.h3,h4,.h4,h5,.h5,h6,.h6,a,li,span{font-family: 'Jost';}
 /* grid css start here */
 /*=====================*/
 .custom-grid-view .full-width{padding:0 5rem;}
-.custom-section-text h2 {font-size: 36px;font-family: 'Lustria';line-height: 1.2;letter-spacing: 0;}
+.custom-section-text h2 {font-size: 36px;font-family: 'Lustria';line-height: 1.2;letter-spacing: 0;margin: 0;}
 .custom-section-text h2 p{margin: 0;}
 /*===================*/
 /* grid css end here */
