@@ -43,6 +43,9 @@ h1,.h1,h2,.h2,h3,.h3,h4,.h4,h5,.h5,h6,.h6,a,li,span{font-family: 'Jost';}
 .custom-product-grid {
     display: flex;
 }
+.custom-product-main {
+    width: calc(33.3% - 20px);
+}
 /*===================*/
 /* grid css end here */
 /*===================*/
