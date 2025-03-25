@@ -19,6 +19,13 @@
       </div>
       <div class="custom-product-grid" id="section-{{ section.id }}">
         {% for block in section.blocks %}
+          {% style %}
+            #section-{{ section.id }} #block-{{ block.id }} .open-popup {
+              position: absolute;
+              top: {{ block.settings.position_top}}%;
+              right: {{ block.settings.position_right }}%;
+            }
+          {% endstyle %}
           {% assign product = all_products[block.settings['custom-product']] %}
           {% for image in product.images %}
             <div class="product-img-wrapper" id="block-{{ block.id }}">
