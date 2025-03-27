@@ -9,7 +9,46 @@
       padding-bottom: {{ section.settings.padding_bottom }}px;
     }
   }
-  
+  .hidden { display: none; }
+  .product-popup {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex; justify-content: center; align-items: center;
+  }
+  .popup-content {
+    background: white;
+    padding: 20px;
+    width: 400px;
+    text-align: center;
+    position: relative;
+  }
+  .close-popup {
+    position: absolute;
+    top: 10px; right: 15px;
+    cursor: pointer;
+    font-size: 24px;
+  }
+  .color-variants {
+    display: flex; gap: 10px; margin: 10px 0;
+  }
+  .color-pill {
+    width: 40px; height: 40px;
+    border-radius: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid transparent;
+    transition: border 0.3s ease;
+  }
+  .color-pill.selected {
+    border: 2px solid black;
+  }
+  .product-info img{
+        width: 100%;
+  }
 {%- endstyle -%}
 
 <div class="section-{{ section.id }}-padding">
@@ -32,58 +71,63 @@
 
           {% for image in product.images %}
             <div class="product-img-wrapper" id="block-{{ block.id }}">
-              {{ image | image_url: width: 433, height: 444 | image_tag: class: 'custom-product-img' }}
+              {{ image.src | image_url: width: 433, height: 444 | image_tag: class: 'custom-product-img' }}
               <button class="open-popup">
                 <span class="svg-wrapper">{{ 'icon-plus-custom.svg' | inline_asset_content }}</span>
               </button>
+              {% comment %}
+                <img src="{{ image.src | product_img_url: 'grande' }}">
+                {{ product.title }}
+                {{ product.price | money_without_trailing_zeros }}
+                {{ product.description }}
+              {% endcomment %}
             </div>
           {% endfor %}
         {% endfor %}
-      </div>
+        <div class="pop-up-123">
+          <div class="product-popup hidden">
+            <div class="popup-content">
+              <span class="close-popup">&times;</span>
+              <!-- Product Details -->
+              <div class="product-info">
+                {% assign product = all_products[block.settings['custom-product']] %}
+                {{ image.src | image_url: width: 433, height: 444 | image_tag: class: 'custom-product-img' }}
+                <h2>{{ product.title }}</h2>
+                <p>{{ product.description | strip_html | truncate: 100 }}</p>
 
-      <div class="pop-up-123">
-        <div class="product-popup hidden">
-          <div class="popup-content">
-            <span class="close-popup">&times;</span>
-            <!-- Product Details -->
-            <div class="product-info">
-              {% assign product = all_products[block.settings['custom-product']] %}
-              {{ image.src | image_url: width: 433, height: 444 | image_tag: class: 'custom-product-img' }}
-              <h2>{{ product.title }}</h2>
-              <p>{{ product.description | strip_html | truncate: 100 }}</p>
+                <!-- Variant Selectors -->
+                <div class="variant-selectors">
+                  {% assign option_names = product.options | downcase %}
 
-              <!-- Variant Selectors -->
-              <div class="variant-selectors">
-                {% assign option_names = product.options | downcase %}
+                  {% if option_names contains 'color' %}
+                    <label>Choose Color:</label>
+                    <div class="color-variants">
+                      {% assign color_variants = product.variants | map: 'option1' | uniq %}
+                      {% for color in color_variants %}
+                        {% assign variant = product.variants | where: 'option1', color | first %}
+                        {% assign color_swatch = variant.featured_image | default: '' %}
+                        <div
+                          class="color-pill"
+                          data-color="{{ color }}"
+                          style="background-color: {{ color | downcase }}; border-left: 4px solid {{ color | downcase }};"
+                        ></div>
+                      {% endfor %}
+                    </div>
+                  {% endif %}
 
-                {% if option_names contains 'color' %}
-                  <label>Choose Color:</label>
-                  <div class="color-variants">
-                    {% assign color_variants = product.variants | map: 'option1' | uniq %}
-                    {% for color in color_variants %}
-                      {% assign variant = product.variants | where: 'option1', color | first %}
-                      {% assign color_swatch = variant.featured_image | default: '' %}
-                      <div
-                        class="color-pill"
-                        data-color="{{ color }}"
-                        style="background-color: {{ color | downcase }}; border-left: 4px solid {{ color | downcase }};"
-                      ></div>
-                    {% endfor %}
-                  </div>
-                {% endif %}
-
-                {% if option_names contains 'size' %}
-                  <label for="size-select">Choose Size:</label>
-                  <select id="size-select">
-                    {% assign size_variants = product.variants | map: 'option2' | uniq %}
-                    {% for size in size_variants %}
-                      <option value="{{ size }}">{{ size }}</option>
-                    {% endfor %}
-                  </select>
-                {% endif %}
+                  {% if option_names contains 'size' %}
+                    <label for="size-select">Choose Size:</label>
+                    <select id="size-select">
+                      {% assign size_variants = product.variants | map: 'option2' | uniq %}
+                      {% for size in size_variants %}
+                        <option value="{{ size }}">{{ size }}</option>
+                      {% endfor %}
+                    </select>
+                  {% endif %}
+                </div>
+                <!-- Add to Cart Button -->
+                <button class="add-to-cart" data-product-id="{{ product.id }}">Add to Cart</button>
               </div>
-              <!-- Add to Cart Button -->
-              <button class="add-to-cart" data-product-id="{{ product.id }}">Add to Cart</button>
             </div>
           </div>
         </div>
