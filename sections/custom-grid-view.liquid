@@ -17,317 +17,103 @@
       <div class="custom-section-text">
         <h2>{{ section.settings['section-heading-text'] }}</h2>
       </div>
+
       <div class="custom-product-grid" id="section-{{ section.id }}">
         {% for block in section.blocks %}
+          {% assign product = all_products[block.settings['custom-product']] %}
+
           {% style %}
-            #section-{{ section.id }} #block-{{ block.id }} .open-popup {
+            #block-{{ block.id }} .open-popup {
               position: absolute;
-              top: {{ block.settings.position_top}}%;
+              top: {{ block.settings.position_top }}%;
               right: {{ block.settings.position_right }}%;
             }
           {% endstyle %}
 
-          {% assign product = all_products[block.settings['custom-product']] %}
-
-          {% for image in product.images %}
-            <div class="product-img-wrapper" id="block-{{ block.id }}">
-              {{ image.src | image_url: width: 433, height: 444 | image_tag: class: 'custom-product-img' }}
-              <button class="open-popup">
-                <span class="svg-wrapper">{{ 'icon-plus-custom.svg' | inline_asset_content }}</span>
-              </button>
-              {% comment %}
-                <img src="{{ image.src | product_img_url: 'grande' }}">
-                {{ product.title }}
-                {{ product.price | money_without_trailing_zeros }}
-                {{ product.description }}
-              {% endcomment %}
-            </div>
-          {% endfor %}
-        {% endfor %}
-        
-        <div class="pop-up-123">
-          <div class="product-popup hidden">
-            <div class="popup-content">
-              <span class="close-popup">&times;</span>
-              <!-- Product Details -->
-              <div class="product-info">
-                {% assign product = all_products[block.settings['custom-product']] %}
-                {{ image.src | image_url: width: 433, height: 444 | image_tag: class: 'custom-product-img' }}
-                <h2>{{ product.title }}</h2>
-                <p>{{ product.description | strip_html | truncate: 100 }}</p>
-
-                <!-- Variant Selectors -->
-                <div class="variant-selectors">
-                  {% assign option_names = product.options | downcase %}
-
-                  {% if option_names contains 'color' %}
-                    <label>Choose Color:</label>
-                    <div class="color-variants">
-                      {% assign color_variants = product.variants | map: 'option1' | uniq %}
-                      {% for color in color_variants %}
-                        {% assign variant = product.variants | where: 'option1', color | first %}
-                        {% assign color_swatch = variant.featured_image | default: '' %}
-                        <div
-                          class="color-pill"
-                          data-color="{{ color }}"
-                          style="background-color: {{ color | downcase }}; border-left: 4px solid {{ color | downcase }};"
-                        ></div>
-                      {% endfor %}
-                    </div>
-                  {% endif %}
-
-                  {% if option_names contains 'size' %}
-                    <label for="size-select">Choose Size:</label>
-                    <select id="size-select">
-                      {% assign size_variants = product.variants | map: 'option2' | uniq %}
-                      {% for size in size_variants %}
-                        <option value="{{ size }}">{{ size }}</option>
-                      {% endfor %}
-                    </select>
-                  {% endif %}
-                </div>
-                <!-- Add to Cart Button -->
-                <button class="add-to-cart" data-product-id="{{ product.id }}">Add to Cart</button>
-              </div>
-            </div>
+          <div class="product-img-wrapper" id="block-{{ block.id }}" data-product-handle="{{ product.handle }}">
+            {{ product.featured_image | image_url: width: 433, height: 444 | image_tag: class: 'custom-product-img open-popup', data-product-id: product.id }}
           </div>
-        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Popup -->
+<div class="product-popup hidden">
+  <div class="popup-content">
+    <span class="close-popup">&times;</span>
+    <div class="product-info">
+      <img class="popup-product-img" src="" alt="Product Image">
+      <h2 class="popup-product-title"></h2>
+      <p class="popup-product-description"></p>
+
+      <!-- Variant Selectors -->
+      <div class="variant-selectors">
+        <label for="size-select">Choose Size:</label>
+        <select id="size-select"></select>
       </div>
 
-      {% comment %}
-        popup start here
-      {% endcomment %}
+      <button class="add-to-cart" data-product-id="">Add to Cart</button>
     </div>
   </div>
 </div>
 
 <!-- JavaScript -->
 <script>
-  document.addEventListener("DOMContentLoaded", function() {
+  document.addEventListener("DOMContentLoaded", function () {
     const popup = document.querySelector(".product-popup");
-    const openPopupBtn = document.querySelector(".open-popup");
     const closePopupBtn = document.querySelector(".close-popup");
-    const addToCartBtn = document.querySelector(".add-to-cart");
-    const colorPills = document.querySelectorAll(".color-pill");
-    const sizeSelect = document.querySelector("#size-select");
+    const productImgWrappers = document.querySelectorAll(".product-img-wrapper");
 
-    let selectedColor = "";
+    productImgWrappers.forEach(wrapper => {
+      wrapper.addEventListener("click", function () {
+        const productHandle = this.getAttribute("data-product-handle");
 
-    // Open Popup
-    openPopupBtn.addEventListener("click", function() {
-      popup.classList.remove("hidden");
-    });
-
-    // Close Popup
-    closePopupBtn.addEventListener("click", function() {
-      popup.classList.add("hidden");
-    });
-
-    // Select Color
-    colorPills.forEach(pill => {
-      pill.addEventListener("click", function() {
-        colorPills.forEach(p => p.classList.remove("selected"));
-        this.classList.add("selected");
-        selectedColor = this.getAttribute("data-color");
-      });
-    });
-
-    // Find the Correct Variant Based on Selected Color and Size
-    function findVariantId(productVariants, selectedColor, selectedSize) {
-      let variantId = null;
-      productVariants.forEach(variant => {
-        if (variant.option1 === selectedColor && variant.option2 === selectedSize) {
-          variantId = variant.id;
-        }
-      });
-      return variantId;
-    }
-
-    // Add to Cart Function
-  });
-</script>
-<!--
-  <script>
-    document.addEventListener("DOMContentLoaded", function() {
-      const popup = document.querySelector(".product-popup");
-      const openPopupBtn = document.querySelector(".open-popup");
-      const closePopupBtn = document.querySelector(".close-popup");
-      const addToCartBtn = document.querySelector(".add-to-cart");
-      const colorPills = document.querySelectorAll(".color-pill");
-      const sizeSelect = document.querySelector("#size-select");
-
-      let selectedColor = "";
-
-      // Open Popup
-      openPopupBtn.addEventListener("click", function() {
-        popup.classList.remove("hidden");
-      });
-
-      // Close Popup
-      closePopupBtn.addEventListener("click", function() {
-        popup.classList.add("hidden");
-      });
-
-      // Select Color
-      colorPills.forEach(pill => {
-        pill.addEventListener("click", function() {
-          colorPills.forEach(p => p.classList.remove("selected"));
-          this.classList.add("selected");
-          selectedColor = this.getAttribute("data-color");
-        });
-      });
-
-      // Find the Correct Variant Based on Selected Color and Size
-      function findVariantId(productVariants, selectedColor, selectedSize) {
-        let variantId = null;
-        productVariants.forEach(variant => {
-          if (variant.option1 === selectedColor && variant.option2 === selectedSize) {
-            variantId = variant.id;
-          }
-        });
-        return variantId;
-      }
-
-      // Add to Cart Function
-      addToCartBtn.addEventListener("click", function() {
-        let productId = addToCartBtn.dataset.productId;
-        let selectedSize = sizeSelect.value;
-
-        if (!selectedColor || !selectedSize) {
-          alert("Please select both color and size.");
-          return;
-        }
-
-        fetch(/products/${productId}.json)
+        fetch(`/products/${productHandle}.json`)
           .then(response => response.json())
           .then(data => {
-            let productVariants = data.product.variants;
-            let variantId = findVariantId(productVariants, selectedColor, selectedSize);
+            const product = data.product;
 
-            if (!variantId) {
-              alert("Invalid selection.");
-              return;
-            }
+            document.querySelector(".popup-product-img").src = product.images[0].src;
+            document.querySelector(".popup-product-title").textContent = product.title;
+            document.querySelector(".popup-product-description").textContent = product.body_html.replace(/(<([^>]+)>)/gi, "").substring(0, 100);
+            document.querySelector(".add-to-cart").setAttribute("data-product-id", product.variants[0].id);
 
-            // Add to Cart API Call
-            fetch('/cart/add.js', {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({ quantity: 1, id: variantId })
-            })
-            .then(response => response.json())
-            .then(data => {
-              alert("Product added to cart!");
+            let sizeSelect = document.querySelector("#size-select");
+            sizeSelect.innerHTML = "";
+            let sizes = [...new Set(product.variants.map(v => v.option2))];
 
-              // Redirect to Cart Page
-              window.location.href = "/cart";
-
-              // Update Cart Drawer (if enabled)
-              fetch('/cart.js')
-                .then(response => response.json())
-                .then(cartData => {
-                  if (document.querySelector("cart-drawer")) {
-                    document.querySelector("cart-drawer").dispatchEvent(new Event("cart:updated"));
-                  }
-                });
+            sizes.forEach(size => {
+              let option = document.createElement("option");
+              option.value = size;
+              option.textContent = size;
+              sizeSelect.appendChild(option);
             });
+
+            popup.classList.remove("hidden");
           });
       });
     });
-  </script>
--->
-{% schema %}
-{
-  "name": "custom grid view",
-  "class": "custom-grid-view",
-  "settings": [
-    {
-      "type": "richtext",
-      "id": "section-heading-text",
-      "label": "Heading",
-    },
-    {
-      "type": "select",
-      "id": "section-checkbox",
-      "label": "Layout",
-      "options": [
-        {
-          "label": "Full Width",
-          "value": "full-width",
-        },
-        {
-          "label": "Page Width",
-          "value": "page-width",
-        },
-      ],
-      "default":"page-width"
-    },
-    {
-      "type": "header",
-      "content": "t:sections.all.padding.section_padding_heading"
-    },
-    {
-      "type": "range",
-      "id": "padding_top",
-      "min": 0,
-      "max": 100,
-      "step": 1,
-      "unit": "px",
-      "label": "t:sections.all.padding.padding_top",
-      "default": 40
-    },
-    {
-      "type": "range",
-      "id": "padding_bottom",
-      "min": 0,
-      "max": 100,
-      "step": 1,
-      "unit": "px",
-      "label": "t:sections.all.padding.padding_bottom",
-      "default": 52
-    },
-  ],
-  "blocks": [
-    {
-      "type": "custom-product",
-      "name": "custom product",
-      "settings": [
-        {
-          "type": "product",
-          "id": "custom-product",
-          "label": "Product"
-        },
-        {
-          "type": "header",
-          "content": "Button Position"
-        },
-        {
-          "type": "range",
-          "id": "position_top",
-          "min": 0,
-          "max": 100,
-          "step": 1,
-          "unit": "%",
-          "label": "Position Top",
-          "default": 40
-        },
-        {
-          "type": "range",
-          "id": "position_right",
-          "min": 0,
-          "max": 100,
-          "step": 1,
-          "unit": "%",
-          "label": "Position Right",
-          "default": 52
-        }
-      ],
-    },
-  ],
-  "presets": [
-    {
-      "name": "custom grid view",
-    }
-  ],
-}
-{% endschema %}
+
+    closePopupBtn.addEventListener("click", function () {
+      popup.classList.add("hidden");
+    });
+
+    document.querySelector(".add-to-cart").addEventListener("click", function () {
+      let productId = this.getAttribute("data-product-id");
+      let selectedSize = document.querySelector("#size-select").value;
+
+      fetch("/cart/add.js", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ quantity: 1, id: productId })
+      })
+      .then(response => response.json())
+      .then(() => {
+        alert("Product added to cart!");
+        window.location.href = "/cart";
+      });
+    });
+  });
+</script>
