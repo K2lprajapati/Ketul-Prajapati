@@ -141,6 +141,52 @@
 </div>
 
 <!-- JavaScript -->
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    debugger;
+    const popup = document.querySelector(".product-popup");
+    const openPopupBtn = document.querySelector(".open-popup");
+    const closePopupBtn = document.querySelector(".close-popup");
+    const addToCartBtn = document.querySelector(".add-to-cart");
+    const colorPills = document.querySelectorAll(".color-pill");
+    const sizeSelect = document.querySelector("#size-select");
+
+    let selectedColor = "";
+
+    // Open Popup
+    openPopupBtn.addEventListener("click", function() {
+      debugger;
+      popup.classList.remove("hidden");
+    });
+
+    // Close Popup
+    closePopupBtn.addEventListener("click", function() {
+      popup.classList.add("hidden");
+    });
+
+    // Select Color
+    colorPills.forEach(pill => {
+      pill.addEventListener("click", function() {
+        colorPills.forEach(p => p.classList.remove("selected"));
+        this.classList.add("selected");
+        selectedColor = this.getAttribute("data-color");
+      });
+    });
+
+    // Find the Correct Variant Based on Selected Color and Size
+    function findVariantId(productVariants, selectedColor, selectedSize) {
+      let variantId = null;
+      productVariants.forEach(variant => {
+        if (variant.option1 === selectedColor && variant.option2 === selectedSize) {
+          variantId = variant.id;
+        }
+      });
+      return variantId;
+    }
+
+    // Add to Cart Function
+  });
+</script>
 <!--
   <script>
     document.addEventListener("DOMContentLoaded", function() {
