@@ -115,33 +115,33 @@
         });
       });
 
-      document.querySelector(".add-to-cart").addEventListener("click", function() {
-        const productId = this.getAttribute("data-product-id");
-        selectedSize = document.querySelector("#size-select").value;
-        let variantId = null;
+      // document.querySelector(".add-to-cart").addEventListener("click", function() {
+      //   const productId = this.getAttribute("data-product-id");
+      //   selectedSize = document.querySelector("#size-select").value;
+      //   let variantId = null;
 
-        variants.forEach(variant => {
-          if (variant.option1 === selectedColor && variant.option2 === selectedSize) {
-            variantId = variant.id;
-          }
-        });
+      //   variants.forEach(variant => {
+      //     if (variant.option1 === selectedColor && variant.option2 === selectedSize) {
+      //       variantId = variant.id;
+      //     }
+      //   });
 
-        if (!variantId) {
-          alert("Please select valid color and size.");
-          return;
-        }
+      //   if (!variantId) {
+      //     alert("Please select valid color and size.");
+      //     return;
+      //   }
 
-        fetch('/cart/add.js', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ quantity: 1, id: variantId })
-        })
-        .then(response => response.json())
-        .then(() => {
-          alert("Product added to cart!");
-          window.location.href = "/cart";
-        });
-      });
+      //   fetch('/cart/add.js', {
+      //     method: 'POST',
+      //     headers: { 'Content-Type': 'application/json' },
+      //     body: JSON.stringify({ quantity: 1, id: variantId })
+      //   })
+      //   .then(response => response.json())
+      //   .then(() => {
+      //     alert("Product added to cart!");
+      //     window.location.href = "/cart";
+      //   });
+      // });
     }
   });
 </script>
