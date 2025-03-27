@@ -3,7 +3,8 @@
     <span class="close-popup">&times;</span>
     <!-- Product Details -->
     <div class="product-info">
-      <img src="{{ product.featured_image | img_url: 'large' }}" alt="{{ product.title }}">
+      {% assign product = all_products[block.settings['custom-product']] %}
+      {{ image.src | image_url: width: 433, height: 444 | image_tag: class: 'custom-product-img' }}
       <h2>{{ product.title }}</h2>
       <p>{{ product.description | strip_html | truncate: 100 }}</p>
 
