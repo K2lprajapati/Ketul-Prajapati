@@ -26,6 +26,16 @@
             {% endfor %}
           </div>
         {% endif %}
+
+        {% if option_names contains 'size' %}
+          <label for="size-select">Choose Size:</label>
+          <select id="size-select">
+            {% assign size_variants = product.variants | map: 'option2' | uniq %}
+            {% for size in size_variants %}
+              <option value="{{ size }}">{{ size }}</option>
+            {% endfor %}
+          </select>
+        {% endif %}
       </div>
     </div>
   </div>
