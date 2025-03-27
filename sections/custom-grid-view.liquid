@@ -22,22 +22,27 @@
           {% assign product = all_products[block.settings['custom-product']] %}
           {% if product %}
             <div class="product-img-wrapper" id="block-{{ block.id }}">
-              {{ product.featured_image | image_url: width: 433, height: 444 | image_tag: class: 'custom-product-img' }}
-              <button class="open-popup" data-product-id="{{ product.id }}" data-block-id="{{ block.id }}">
+              <img src="{{ product.featured_image | image_url: width: 433, height: 444 }}" class="custom-product-img" alt="{{ product.title }}">
+              <button class="open-popup" data-product-handle="{{ product.handle }}">
                 <span class="svg-wrapper">{{ 'icon-plus-custom.svg' | inline_asset_content }}</span>
               </button>
             </div>
           {% endif %}
         {% endfor %}
       </div>
+    </div>
+  </div>
+</div>
 
-      <!-- Popup Modal -->
-      <div class="product-popup hidden">
-        <div class="popup-content">
-          <span class="close-popup">&times;</span>
-          <div class="product-info"></div>
-        </div>
-      </div>
+<!-- Product Popup -->
+<div class="product-popup hidden">
+  <div class="popup-content">
+    <span class="close-popup">&times;</span>
+    <div class="product-info">
+      <img id="popup-product-image" src="" alt="Product Image">
+      <h2 id="popup-product-title"></h2>
+      <p id="popup-product-description"></p>
+      <p id="popup-product-price"></p>
     </div>
   </div>
 </div>
@@ -47,54 +52,20 @@
   document.addEventListener("DOMContentLoaded", function() {
     const popup = document.querySelector(".product-popup");
     const closePopupBtn = document.querySelector(".close-popup");
-    const productInfo = document.querySelector(".product-info");
+    const openPopupBtns = document.querySelectorAll(".open-popup");
 
-    document.querySelectorAll(".open-popup").forEach(button => {
+    openPopupBtns.forEach(button => {
       button.addEventListener("click", function() {
-        const productId = this.getAttribute("data-product-id");
-        fetch(`/products/${productId}.json`)
+        const productHandle = this.getAttribute("data-product-handle");
+        fetch(`/products/${productHandle}.json`)
           .then(response => response.json())
           .then(data => {
             const product = data.product;
-            let variantOptions = "";
-            let colorVariants = [];
-            let sizeVariants = [];
-
-            product.variants.forEach(variant => {
-              if (!colorVariants.includes(variant.option1)) {
-                colorVariants.push(variant.option1);
-              }
-              if (!sizeVariants.includes(variant.option2)) {
-                sizeVariants.push(variant.option2);
-              }
-            });
-
-            if (colorVariants.length > 0) {
-              variantOptions += `<label>Choose Color:</label><div class='color-variants'>`;
-              colorVariants.forEach(color => {
-                variantOptions += `<div class='color-pill' data-color='${color}' style='background-color: ${color};'></div>`;
-              });
-              variantOptions += `</div>`;
-            }
-
-            if (sizeVariants.length > 0) {
-              variantOptions += `<label for='size-select'>Choose Size:</label><select id='size-select'>`;
-              sizeVariants.forEach(size => {
-                variantOptions += `<option value='${size}'>${size}</option>`;
-              });
-              variantOptions += `</select>`;
-            }
-
-            productInfo.innerHTML = `
-              <img src="${product.featured_image}" class='custom-product-img'>
-              <h2>${product.title}</h2>
-              <p>${product.body_html.replace(/<[^>]+>/g, '').substring(0, 100)}</p>
-              ${variantOptions}
-              <button class="add-to-cart" data-product-id="${product.id}">Add to Cart</button>
-            `;
-
+            document.querySelector("#popup-product-image").src = product.images[0] || "";
+            document.querySelector("#popup-product-title").textContent = product.title;
+            document.querySelector("#popup-product-description").textContent = product.body_html.replace(/<[^>]*>?/gm, '');
+            document.querySelector("#popup-product-price").textContent = (product.variants[0].price / 100).toFixed(2) + ' ' + Shopify.currency.active;
             popup.classList.remove("hidden");
-            setupVariantSelection(product.variants);
           });
       });
     });
@@ -102,47 +73,6 @@
     closePopupBtn.addEventListener("click", function() {
       popup.classList.add("hidden");
     });
-
-    function setupVariantSelection(variants) {
-      let selectedColor = "";
-      let selectedSize = "";
-
-      document.querySelectorAll(".color-pill").forEach(pill => {
-        pill.addEventListener("click", function() {
-          document.querySelectorAll(".color-pill").forEach(p => p.classList.remove("selected"));
-          this.classList.add("selected");
-          selectedColor = this.getAttribute("data-color");
-        });
-      });
-
-      // document.querySelector(".add-to-cart").addEventListener("click", function() {
-      //   const productId = this.getAttribute("data-product-id");
-      //   selectedSize = document.querySelector("#size-select").value;
-      //   let variantId = null;
-
-      //   variants.forEach(variant => {
-      //     if (variant.option1 === selectedColor && variant.option2 === selectedSize) {
-      //       variantId = variant.id;
-      //     }
-      //   });
-
-      //   if (!variantId) {
-      //     alert("Please select valid color and size.");
-      //     return;
-      //   }
-
-      //   fetch('/cart/add.js', {
-      //     method: 'POST',
-      //     headers: { 'Content-Type': 'application/json' },
-      //     body: JSON.stringify({ quantity: 1, id: variantId })
-      //   })
-      //   .then(response => response.json())
-      //   .then(() => {
-      //     alert("Product added to cart!");
-      //     window.location.href = "/cart";
-      //   });
-      // });
-    }
   });
 </script>
 
@@ -155,12 +85,42 @@
       "type": "richtext",
       "id": "section-heading-text",
       "label": "Heading"
+    },
+    {
+      "type": "select",
+      "id": "section-checkbox",
+      "label": "Layout",
+      "options": [
+        { "label": "Full Width", "value": "full-width" },
+        { "label": "Page Width", "value": "page-width" }
+      ],
+      "default": "page-width"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 52
     }
   ],
   "blocks": [
     {
       "type": "custom-product",
-      "name": "custom product",
+      "name": "Custom Product",
       "settings": [
         {
           "type": "product",
