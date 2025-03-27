@@ -71,49 +71,49 @@
         "custom_product_jt8DJz": {
           "type": "custom-product",
           "settings": {
-            "custom-product": "black-leather-bag",
-            "position_top": 55,
-            "position_right": 34
+            "custom-product": "black-leather-bag"
           }
         },
         "custom_product_KfAT79": {
           "type": "custom-product",
           "settings": {
-            "custom-product": "blue-silk-tuxedo",
-            "position_top": 49,
-            "position_right": 9
+            "custom-product": "blue-silk-tuxedo"
           }
         },
         "custom_product_neLMKC": {
           "type": "custom-product",
           "settings": {
-            "custom-product": "chequered-red-shirt",
-            "position_top": 40,
-            "position_right": 52
+            "custom-product": "chequered-red-shirt"
           }
         },
         "custom_product_aHT7MN": {
           "type": "custom-product",
           "settings": {
-            "custom-product": "classic-leather-jacket",
-            "position_top": 40,
-            "position_right": 52
+            "custom-product": "classic-leather-jacket"
           }
         },
         "custom_product_hiXqQU": {
           "type": "custom-product",
           "settings": {
-            "custom-product": "classic-varsity-top",
-            "position_top": 40,
-            "position_right": 52
+            "custom-product": "classic-varsity-top"
           }
         },
         "custom_product_BPDFD9": {
           "type": "custom-product",
           "settings": {
-            "custom-product": "dark-denim-top",
-            "position_top": 40,
-            "position_right": 52
+            "custom-product": "dark-denim-top"
+          }
+        },
+        "custom_product_izea9a": {
+          "type": "custom-product",
+          "settings": {
+            "custom-product": "floral-white-top"
+          }
+        },
+        "custom_product_xagHcE": {
+          "type": "custom-product",
+          "settings": {
+            "custom-product": "olive-green-jacket"
           }
         }
       },
@@ -123,7 +123,9 @@
         "custom_product_neLMKC",
         "custom_product_aHT7MN",
         "custom_product_hiXqQU",
-        "custom_product_BPDFD9"
+        "custom_product_BPDFD9",
+        "custom_product_izea9a",
+        "custom_product_xagHcE"
       ],
       "settings": {
         "section-heading-text": "<p>Tisso vison in the wild</p>",
