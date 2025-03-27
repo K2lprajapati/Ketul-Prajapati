@@ -66,9 +66,7 @@
           {% assign product = all_products[block.settings['custom-product']] %}
 
           <div class="product-img-wrapper" data-product-handle="{{ product.handle }}">
-            <img class="custom-product-img open-popup"
-                 src="{{ product.featured_image | image_url: width: 433, height: 444 }}"
-                 alt="{{ product.title }}">
+            {{ product.featured_image | image_url: width: 433, height: 444 | image_tag: class: 'custom-product-img open-popup', alt: product.title }}
           </div>
         {% endfor %}
       </div>
