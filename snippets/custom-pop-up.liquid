@@ -5,6 +5,10 @@
     <div class="product-info">
       <img src="{{ product.featured_image | img_url: 'large' }}" alt="{{ product.title }}">
       <h2>{{ product.title }}</h2>
+      <p>{{ product.description | strip_html | truncate: 100 }}</p>
+
+      <!-- Variant Selectors -->
+      <div></div>
     </div>
   </div>
 </div>
