@@ -20,50 +20,76 @@
       <div class="custom-product-grid" id="section-{{ section.id }}">
         {% for block in section.blocks %}
           {% assign product = all_products[block.settings['custom-product']] %}
-          {% if product %}
-            <div class="product-img-wrapper" id="block-{{ block.id }}" data-product-id="{{ product.id }}" data-product-title="{{ product.title }}" data-product-description="{{ product.description | strip_html | escape }}" data-product-image="{{ product.featured_image | image_url }}">
-              {{ product.featured_image | image_url: width: 433, height: 444 | image_tag: class: 'custom-product-img' }}
-              <button class="open-popup">
+          
+          {% if product != blank %}
+            <div class="product-img-wrapper" id="block-{{ block.id }}">
+              <img 
+                src="{{ product.featured_image | image_url: width: 433, height: 444 }}" 
+                class="custom-product-img"
+                alt="{{ product.title | escape }}"
+              >
+              <button class="open-popup" data-block-id="{{ block.id }}">
                 <span class="svg-wrapper">{{ 'icon-plus-custom.svg' | inline_asset_content }}</span>
               </button>
             </div>
           {% endif %}
         {% endfor %}
       </div>
+
+      <!-- Popup Container -->
+      <div class="pop-up-123">
+        <div class="product-popup hidden">
+          <div class="popup-content">
+            <span class="close-popup">&times;</span>
+            
+            <!-- Product Details -->
+            <div class="product-info">
+              <img id="popup-product-img" src="" class="custom-product-img">
+              <h2 id="popup-product-title"></h2>
+              <p id="popup-product-description"></p>
+
+              <!-- Variant Selectors -->
+              <div class="variant-selectors">
+                <label for="popup-size-select">Choose Size:</label>
+                <select id="popup-size-select"></select>
+              </div>
+
+              <!-- Add to Cart Button -->
+              <button id="popup-add-to-cart" data-product-id="">Add to Cart</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      
     </div>
   </div>
 </div>
 
-<div class="product-popup hidden">
-  <div class="popup-content">
-    <span class="close-popup">&times;</span>
-    <div class="product-info">
-      <img src="" class="popup-product-img" alt="Product Image">
-      <h2 class="popup-product-title"></h2>
-      <p class="popup-product-description"></p>
-    </div>
-  </div>
-</div>
-
+<!-- JavaScript -->
 <script>
   document.addEventListener("DOMContentLoaded", function() {
     const popup = document.querySelector(".product-popup");
     const closePopupBtn = document.querySelector(".close-popup");
     const openPopupBtns = document.querySelectorAll(".open-popup");
-    const popupTitle = popup.querySelector(".popup-product-title");
-    const popupImg = popup.querySelector(".popup-product-img");
-    const popupDescription = popup.querySelector(".popup-product-description");
+    const productTitle = document.getElementById("popup-product-title");
+    const productImg = document.getElementById("popup-product-img");
+    const productDescription = document.getElementById("popup-product-description");
+    const addToCartBtn = document.getElementById("popup-add-to-cart");
+    const sizeSelect = document.getElementById("popup-size-select");
 
     openPopupBtns.forEach(button => {
       button.addEventListener("click", function() {
-        const productBlock = this.closest(".product-img-wrapper");
-        const productTitle = productBlock.dataset.productTitle;
-        const productImg = productBlock.dataset.productImage;
-        const productDescription = productBlock.dataset.productDescription;
+        const blockId = this.getAttribute("data-block-id");
+        const productWrapper = document.getElementById("block-" + blockId);
+        const productImage = productWrapper.querySelector(".custom-product-img").src;
+        const productName = "{{ all_products[block.settings['custom-product']].title }}";
+        const productDesc = "{{ all_products[block.settings['custom-product']].description | strip_html | truncate: 100 }}";
+        const productId = "{{ all_products[block.settings['custom-product']].id }}";
 
-        popupTitle.textContent = productTitle;
-        popupImg.src = productImg;
-        popupDescription.textContent = productDescription;
+        productImg.src = productImage;
+        productTitle.innerText = productName;
+        productDescription.innerText = productDesc;
+        addToCartBtn.setAttribute("data-product-id", productId);
 
         popup.classList.remove("hidden");
       });
