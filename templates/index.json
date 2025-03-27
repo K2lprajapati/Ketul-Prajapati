@@ -110,6 +110,7 @@
         },
         "custom_product_BPDFD9": {
           "type": "custom-product",
+          "disabled": true,
           "settings": {
             "custom-product": "dark-denim-top",
             "position_top": 40,
