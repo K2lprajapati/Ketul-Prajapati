@@ -85,49 +85,49 @@
     }
 
     // Add to Cart Function
-    addToCartBtn.addEventListener("click", function() {
-      let productId = addToCartBtn.dataset.productId;
-      let selectedSize = sizeSelect.value;
+    // addToCartBtn.addEventListener("click", function() {
+    //   let productId = addToCartBtn.dataset.productId;
+    //   let selectedSize = sizeSelect.value;
 
-      if (!selectedColor || !selectedSize) {
-        alert("Please select both color and size.");
-        return;
-      }
+    //   if (!selectedColor || !selectedSize) {
+    //     alert("Please select both color and size.");
+    //     return;
+    //   }
 
-      fetch(/products/${productId}.json)
-        .then(response => response.json())
-        .then(data => {
-          let productVariants = data.product.variants;
-          let variantId = findVariantId(productVariants, selectedColor, selectedSize);
+    //   fetch(/products/${productId}.json)
+    //     .then(response => response.json())
+    //     .then(data => {
+    //       let productVariants = data.product.variants;
+    //       let variantId = findVariantId(productVariants, selectedColor, selectedSize);
 
-          if (!variantId) {
-            alert("Invalid selection.");
-            return;
-          }
+    //       if (!variantId) {
+    //         alert("Invalid selection.");
+    //         return;
+    //       }
 
-          // Add to Cart API Call
-          fetch('/cart/add.js', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ quantity: 1, id: variantId })
-          })
-          .then(response => response.json())
-          .then(data => {
-            alert("Product added to cart!");
+    //       // Add to Cart API Call
+    //       fetch('/cart/add.js', {
+    //         method: 'POST',
+    //         headers: { 'Content-Type': 'application/json' },
+    //         body: JSON.stringify({ quantity: 1, id: variantId })
+    //       })
+    //       .then(response => response.json())
+    //       .then(data => {
+    //         alert("Product added to cart!");
 
-            // Redirect to Cart Page
-            window.location.href = "/cart";
+    //         // Redirect to Cart Page
+    //         window.location.href = "/cart";
 
-            // Update Cart Drawer (if enabled)
-            fetch('/cart.js')
-              .then(response => response.json())
-              .then(cartData => {
-                if (document.querySelector("cart-drawer")) {
-                  document.querySelector("cart-drawer").dispatchEvent(new Event("cart:updated"));
-                }
-              });
-          });
-        });
-    });
+    //         // Update Cart Drawer (if enabled)
+    //         fetch('/cart.js')
+    //           .then(response => response.json())
+    //           .then(cartData => {
+    //             if (document.querySelector("cart-drawer")) {
+    //               document.querySelector("cart-drawer").dispatchEvent(new Event("cart:updated"));
+    //             }
+    //           });
+    //       });
+    //     });
+    // });
   });
 </script>
