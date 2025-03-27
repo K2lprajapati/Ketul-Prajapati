@@ -9,6 +9,7 @@
       padding-bottom: {{ section.settings.padding_bottom }}px;
     }
   }
+  
 {%- endstyle -%}
 
 <div class="section-{{ section.id }}-padding">
@@ -19,7 +20,6 @@
       </div>
       <div class="custom-product-grid" id="section-{{ section.id }}">
         {% for block in section.blocks %}
-          
           {% style %}
             #section-{{ section.id }} #block-{{ block.id }} .open-popup {
               position: absolute;
@@ -28,11 +28,11 @@
             }
           {% endstyle %}
 
-          <!-- {% assign product = all_products.block.settings['custom-product'] %} -->
+          {% assign product = all_products.block.settings['custom-product'] %}
 
           {% for image in product.images %}
             <div class="product-img-wrapper" id="block-{{ block.id }}">
-              {{ block.settings['custom-product'].src | image_url: width: 433, height: 444 | image_tag: class: 'custom-product-img' }}
+              {{ image.src | image_url: width: 433, height: 444 | image_tag: class: 'custom-product-img' }}
               <button class="open-popup">
                 <span class="svg-wrapper">{{ 'icon-plus-custom.svg' | inline_asset_content }}</span>
               </button>
