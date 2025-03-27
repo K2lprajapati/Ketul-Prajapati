@@ -10,6 +10,22 @@
       <!-- Variant Selectors -->
       <div class="variant-selectors">
         {% assign option_names = product.options | downcase %}
+
+        {% if option_names contains 'color' %}
+          <label>Choose Color:</label>
+          <div class="color-variants">
+            {% assign color_variants = product.variants | map: 'option1' | uniq %}
+            {% for color in color_variants %}
+              {% assign variant = product.variants | where: 'option1', color | first %}
+              {% assign color_swatch = variant.featured_image | default: '' %}
+              <div
+                class="color-pill"
+                data-color="{{ color }}"
+                style="background-color: {{ color | downcase }}; border-left: 4px solid {{ color | downcase }};"
+              ></div>
+            {% endfor %}
+          </div>
+        {% endif %}
       </div>
     </div>
   </div>
