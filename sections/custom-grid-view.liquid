@@ -9,6 +9,49 @@
       padding-bottom: {{ section.settings.padding_bottom }}px;
     }
   }
+
+  .custom-product-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  .product-img-wrapper {
+    position: relative;
+    cursor: pointer;
+  }
+
+  .open-popup {
+    position: absolute;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+  }
+
+  .product-popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 20px;
+    width: 400px;
+    box-shadow: 0px 5px 15px rgba(0,0,0,0.3);
+    display: none;
+  }
+
+  .product-popup.active {
+    display: block;
+  }
+
+  .close-popup {
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+  }
 {%- endstyle -%}
 
 <div class="section-{{ section.id }}-padding">
@@ -22,16 +65,10 @@
         {% for block in section.blocks %}
           {% assign product = all_products[block.settings['custom-product']] %}
 
-          {% style %}
-            #block-{{ block.id }} .open-popup {
-              position: absolute;
-              top: {{ block.settings.position_top }}%;
-              right: {{ block.settings.position_right }}%;
-            }
-          {% endstyle %}
-
-          <div class="product-img-wrapper" id="block-{{ block.id }}" data-product-handle="{{ product.handle }}">
-            {{ product.featured_image | image_url: width: 433, height: 444 | image_tag: class: 'custom-product-img open-popup', data-product-id: product.id }}
+          <div class="product-img-wrapper" data-product-handle="{{ product.handle }}">
+            <img class="custom-product-img open-popup"
+                 src="{{ product.featured_image | image_url: width: 433, height: 444 }}"
+                 alt="{{ product.title }}">
           </div>
         {% endfor %}
       </div>
@@ -40,22 +77,17 @@
 </div>
 
 <!-- Popup -->
-<div class="product-popup hidden">
+<div class="product-popup">
+  <span class="close-popup">&times;</span>
   <div class="popup-content">
-    <span class="close-popup">&times;</span>
-    <div class="product-info">
-      <img class="popup-product-img" src="" alt="Product Image">
-      <h2 class="popup-product-title"></h2>
-      <p class="popup-product-description"></p>
-
-      <!-- Variant Selectors -->
-      <div class="variant-selectors">
-        <label for="size-select">Choose Size:</label>
-        <select id="size-select"></select>
-      </div>
-
-      <button class="add-to-cart" data-product-id="">Add to Cart</button>
+    <img class="popup-product-img" src="" alt="Product Image">
+    <h2 class="popup-product-title"></h2>
+    <p class="popup-product-description"></p>
+    <div class="variant-selectors">
+      <label for="size-select">Choose Size:</label>
+      <select id="size-select"></select>
     </div>
+    <button class="add-to-cart" data-product-id="">Add to Cart</button>
   </div>
 </div>
 
@@ -91,13 +123,13 @@
               sizeSelect.appendChild(option);
             });
 
-            popup.classList.remove("hidden");
+            popup.classList.add("active");
           });
       });
     });
 
     closePopupBtn.addEventListener("click", function () {
-      popup.classList.add("hidden");
+      popup.classList.remove("active");
     });
 
     document.querySelector(".add-to-cart").addEventListener("click", function () {
@@ -117,3 +149,69 @@
     });
   });
 </script>
+
+{% schema %}
+{
+  "name": "custom grid view",
+  "class": "custom-grid-view",
+  "settings": [
+    {
+      "type": "richtext",
+      "id": "section-heading-text",
+      "label": "Heading"
+    },
+    {
+      "type": "select",
+      "id": "section-checkbox",
+      "label": "Layout",
+      "options": [
+        { "label": "Full Width", "value": "full-width" },
+        { "label": "Page Width", "value": "page-width" }
+      ],
+      "default": "page-width"
+    },
+    {
+      "type": "header",
+      "content": "Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 52
+    }
+  ],
+  "blocks": [
+    {
+      "type": "custom-product",
+      "name": "Custom Product",
+      "settings": [
+        {
+          "type": "product",
+          "id": "custom-product",
+          "label": "Product"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Custom Grid View"
+    }
+  ]
+}
+{% endschema %}
