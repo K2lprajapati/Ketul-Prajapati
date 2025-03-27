@@ -102,6 +102,18 @@
       const addToCartBtn = document.querySelector(".add-to-cart");
       const colorPills = document.querySelectorAll(".color-pill");
       const sizeSelect = document.querySelector("#size-select");
+
+      let selectedColor = "";
+      
+      // Open Popup
+      openPopupBtn.addEventListener("click", function() {
+        popup.classList.remove("hidden");
+      });
+      
+      // Close Popup
+      closePopupBtn.addEventListener("click", function() {
+        popup.classList.add("hidden");
+      });
     )};
 </script>
 {% schema %}
