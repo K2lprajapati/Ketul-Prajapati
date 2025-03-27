@@ -103,18 +103,6 @@
           "settings": {
             "custom-product": "dark-denim-top"
           }
-        },
-        "custom_product_izea9a": {
-          "type": "custom-product",
-          "settings": {
-            "custom-product": "floral-white-top"
-          }
-        },
-        "custom_product_xagHcE": {
-          "type": "custom-product",
-          "settings": {
-            "custom-product": "olive-green-jacket"
-          }
         }
       },
       "block_order": [
@@ -123,9 +111,7 @@
         "custom_product_neLMKC",
         "custom_product_aHT7MN",
         "custom_product_hiXqQU",
-        "custom_product_BPDFD9",
-        "custom_product_izea9a",
-        "custom_product_xagHcE"
+        "custom_product_BPDFD9"
       ],
       "settings": {
         "section-heading-text": "<p>Tisso vison in the wild</p>",
