@@ -3,5 +3,8 @@
     <span class="close-popup">&times;</span>
     <!-- Product Details -->
     <div class="product-info">
+      <img src="{{ product.featured_image | img_url: 'large' }}" alt="{{ product.title }}">
+      <h2>{{ product.title }}</h2>
+    </div>
   </div>
 </div>
