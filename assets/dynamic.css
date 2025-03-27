@@ -107,3 +107,10 @@ h1,.h1,h2,.h2,h3,.h3,h4,.h4,h5,.h5,h6,.h6,a,li,span{font-family: 'Jost';}
   .product-info img{
         width: 100%;
   }
+h2#popup-product-title {
+    font-size: 16px;
+    font-weight: 300;
+    color: #000;
+    line-height: 1.2;
+    letter-spacing: 0;
+}
