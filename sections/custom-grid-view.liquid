@@ -75,12 +75,6 @@
               <button class="open-popup">
                 <span class="svg-wrapper">{{ 'icon-plus-custom.svg' | inline_asset_content }}</span>
               </button>
-              {% comment %}
-                <img src="{{ image.src | product_img_url: 'grande' }}">
-                {{ product.title }}
-                {{ product.price | money_without_trailing_zeros }}
-                {{ product.description }}
-              {% endcomment %}
             </div>
           {% endfor %}
         {% endfor %}
