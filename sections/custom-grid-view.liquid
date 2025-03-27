@@ -78,50 +78,50 @@
             </div>
           {% endfor %}
         {% endfor %}
-        <div class="pop-up-123">
-          <div class="product-popup hidden">
-            <div class="popup-content">
-              <span class="close-popup">&times;</span>
-              <!-- Product Details -->
-              <div class="product-info">
-                {% assign product = all_products[block.settings['custom-product']] %}
-                {{ image.src | image_url: width: 433, height: 444 | image_tag: class: 'custom-product-img' }}
-                <h2>{{ product.title }}</h2>
-                <p>{{ product.description | strip_html | truncate: 100 }}</p>
+      </div>
+      <div class="pop-up-123">
+        <div class="product-popup hidden">
+          <div class="popup-content">
+            <span class="close-popup">&times;</span>
+            <!-- Product Details -->
+            <div class="product-info">
+              {% assign product = all_products[block.settings['custom-product']] %}
+              {{ image.src | image_url: width: 433, height: 444 | image_tag: class: 'custom-product-img' }}
+              <h2>{{ product.title }}</h2>
+              <p>{{ product.description | strip_html | truncate: 100 }}</p>
 
-                <!-- Variant Selectors -->
-                <div class="variant-selectors">
-                  {% assign option_names = product.options | downcase %}
+              <!-- Variant Selectors -->
+              <div class="variant-selectors">
+                {% assign option_names = product.options | downcase %}
 
-                  {% if option_names contains 'color' %}
-                    <label>Choose Color:</label>
-                    <div class="color-variants">
-                      {% assign color_variants = product.variants | map: 'option1' | uniq %}
-                      {% for color in color_variants %}
-                        {% assign variant = product.variants | where: 'option1', color | first %}
-                        {% assign color_swatch = variant.featured_image | default: '' %}
-                        <div
-                          class="color-pill"
-                          data-color="{{ color }}"
-                          style="background-color: {{ color | downcase }}; border-left: 4px solid {{ color | downcase }};"
-                        ></div>
-                      {% endfor %}
-                    </div>
-                  {% endif %}
+                {% if option_names contains 'color' %}
+                  <label>Choose Color:</label>
+                  <div class="color-variants">
+                    {% assign color_variants = product.variants | map: 'option1' | uniq %}
+                    {% for color in color_variants %}
+                      {% assign variant = product.variants | where: 'option1', color | first %}
+                      {% assign color_swatch = variant.featured_image | default: '' %}
+                      <div
+                        class="color-pill"
+                        data-color="{{ color }}"
+                        style="background-color: {{ color | downcase }}; border-left: 4px solid {{ color | downcase }};"
+                      ></div>
+                    {% endfor %}
+                  </div>
+                {% endif %}
 
-                  {% if option_names contains 'size' %}
-                    <label for="size-select">Choose Size:</label>
-                    <select id="size-select">
-                      {% assign size_variants = product.variants | map: 'option2' | uniq %}
-                      {% for size in size_variants %}
-                        <option value="{{ size }}">{{ size }}</option>
-                      {% endfor %}
-                    </select>
-                  {% endif %}
-                </div>
-                <!-- Add to Cart Button -->
-                <button class="add-to-cart" data-product-id="{{ product.id }}">Add to Cart</button>
+                {% if option_names contains 'size' %}
+                  <label for="size-select">Choose Size:</label>
+                  <select id="size-select">
+                    {% assign size_variants = product.variants | map: 'option2' | uniq %}
+                    {% for size in size_variants %}
+                      <option value="{{ size }}">{{ size }}</option>
+                    {% endfor %}
+                  </select>
+                {% endif %}
               </div>
+              <!-- Add to Cart Button -->
+              <button class="add-to-cart" data-product-id="{{ product.id }}">Add to Cart</button>
             </div>
           </div>
         </div>
