@@ -22,8 +22,8 @@
           {% assign product = all_products[block.settings['custom-product']] %}
           {% if product %}
             <div class="product-img-wrapper" id="block-{{ block.id }}">
-              <img src="{{ product.featured_image | image_url: width: 433, height: 444 }}" class="custom-product-img">
-              <button class="open-popup" data-product-id="{{ product.id }}" data-block-id="{{ block.id }}">
+              <img src="{{ product.featured_image | image_url: width: 433, height: 444 }}" class="custom-product-img" alt="{{ product.title }}">
+              <button class="open-popup" data-product-handle="{{ product.handle }}">
                 <span class="svg-wrapper">{{ 'icon-plus-custom.svg' | inline_asset_content }}</span>
               </button>
             </div>
@@ -34,44 +34,37 @@
   </div>
 </div>
 
+<!-- Product Popup -->
 <div class="product-popup hidden">
   <div class="popup-content">
     <span class="close-popup">&times;</span>
     <div class="product-info">
-      <img id="popup-product-img" src="" class="custom-product-img">
+      <img id="popup-product-image" src="" alt="Product Image">
       <h2 id="popup-product-title"></h2>
       <p id="popup-product-description"></p>
       <p id="popup-product-price"></p>
-      <button class="add-to-cart" id="popup-add-to-cart">Add to Cart</button>
     </div>
   </div>
 </div>
 
+<!-- JavaScript -->
 <script>
   document.addEventListener("DOMContentLoaded", function() {
     const popup = document.querySelector(".product-popup");
     const closePopupBtn = document.querySelector(".close-popup");
-    const popupImg = document.getElementById("popup-product-img");
-    const popupTitle = document.getElementById("popup-product-title");
-    const popupDescription = document.getElementById("popup-product-description");
-    const popupPrice = document.getElementById("popup-product-price");
-    const addToCartBtn = document.getElementById("popup-add-to-cart");
+    const openPopupBtns = document.querySelectorAll(".open-popup");
 
-    document.querySelectorAll(".open-popup").forEach(button => {
+    openPopupBtns.forEach(button => {
       button.addEventListener("click", function() {
-        let productId = this.getAttribute("data-product-id");
-        let blockId = this.getAttribute("data-block-id");
-        let productImg = document.querySelector(`#block-${blockId} img`).src;
-
-        fetch(`/products/${productId}.json`)
+        const productHandle = this.getAttribute("data-product-handle");
+        fetch(`/products/${productHandle}.json`)
           .then(response => response.json())
           .then(data => {
-            let product = data.product;
-            popupImg.src = productImg;
-            popupTitle.textContent = product.title;
-            popupDescription.textContent = product.body_html.replace(/<[^>]+>/g, '').substring(0, 100) + "...";
-            popupPrice.textContent = Shopify.formatMoney(product.variants[0].price, "${{amount}}");
-            addToCartBtn.setAttribute("data-product-id", product.variants[0].id);
+            const product = data.product;
+            document.querySelector("#popup-product-image").src = product.images.length > 0 ? product.images[0].src : "https://via.placeholder.com/433x444";
+            document.querySelector("#popup-product-title").textContent = product.title;
+            document.querySelector("#popup-product-description").textContent = product.body_html.replace(/<[^>]*>?/gm, '');
+            document.querySelector("#popup-product-price").textContent = (product.variants[0].price / 100).toFixed(2) + ' ' + Shopify.currency.active;
             popup.classList.remove("hidden");
           });
       });
@@ -127,14 +120,20 @@
   "blocks": [
     {
       "type": "custom-product",
-      "name": "custom product",
+      "name": "Custom Product",
       "settings": [
-        { "type": "product", "id": "custom-product", "label": "Product" }
+        {
+          "type": "product",
+          "id": "custom-product",
+          "label": "Product"
+        }
       ]
     }
   ],
   "presets": [
-    { "name": "custom grid view" }
+    {
+      "name": "custom grid view"
+    }
   ]
 }
 {% endschema %}
