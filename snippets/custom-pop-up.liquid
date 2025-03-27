@@ -8,7 +8,9 @@
       <p>{{ product.description | strip_html | truncate: 100 }}</p>
 
       <!-- Variant Selectors -->
-      <div></div>
+      <div class="variant-selectors">
+        {% assign option_names = product.options | downcase %}
+      </div>
     </div>
   </div>
 </div>
