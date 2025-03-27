@@ -114,6 +114,15 @@
       closePopupBtn.addEventListener("click", function() {
         popup.classList.add("hidden");
       });
+
+      // Select Color
+      colorPills.forEach(pill => {
+        pill.addEventListener("click", function() {
+          colorPills.forEach(p => p.classList.remove("selected"));
+          this.classList.add("selected");
+          selectedColor = this.getAttribute("data-color");
+        });
+      });
     )};
 </script>
 {% schema %}
