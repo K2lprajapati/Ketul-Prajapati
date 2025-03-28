@@ -64,64 +64,17 @@ h1,.h1,h2,.h2,h3,.h3,h4,.h4,h5,.h5,h6,.h6,a,li,span{font-family: 'Jost';}
 /* popup css end here */
 /*====================*/
 
-.product-popup {
-    z-index: 99;
-}
 .hidden { display: none; }
-  .product-popup {
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    display: flex; justify-content: center; align-items: center;
-  }
-  .popup-content {
-    background: white;
-    padding: 20px;
-    width: 400px;
-    text-align: center;
-    position: relative;
-  }
-  .close-popup {
-    font-size: 24px;
-    text-align: right;
-    display: block;
-    line-height: 1;
-  }
-  .color-variants {
-    display: flex; gap: 10px; margin: 10px 0;
-  }
-  .color-pill {
-    width: 40px; height: 40px;
-    border-radius: 20px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 2px solid transparent;
-    transition: border 0.3s ease;
-  }
-  .color-pill.selected {
-    border: 2px solid black;
-  }
-.product-info img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    position: absolute;
-    top: 0;
-    left: 0;
-}
+.product-popup { z-index: 99; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5);display: flex; justify-content: center; align-items: center;}
+.popup-content { background: white; padding: 20px; width: 400px; text-align: center; position: relative; }
+.close-popup { font-size: 24px; text-align: right; display: block; line-height: 1; }
+.color-variants {display: flex; gap: 10px; margin: 10px 0;}
+.color-pill { width: 40px; height: 40px; border-radius: 20px; cursor: pointer; display: flex; align-items: center; justify-content: center; border: 2px solid transparent; transition: border 0.3s ease; } 
+.color-pill.selected { border: 2px solid black; } 
+.product-info img { width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0; } 
+.popup-product-img-wrapper { flex: 1; position: relative; padding-bottom: 55%; } 
+.product-info { display: flex; gap: 8px; }
 
-.popup-product-img-wrapper {
-    flex: 1;
-    position: relative;
-    padding-bottom: 55%;
-}
-.product-info {
-    display: flex;
-    gap: 8px;
-}
 h2#popup-product-title {
     font-size: 16px;
     font-weight: 300;
